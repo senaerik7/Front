@@ -44,23 +44,37 @@ function Formulario() {
         setLancamentos(lancamentos.filter((_, i) => i !== index));
     }
 
-    async function handleGerar() {
-        if (lancamentos.length === 0) {
-            setErro("Adicione pelo menos um lançamento.");
+    function handleAdicionar() {
+        const dataValida = /^\d{4}-\d{2}-\d{2}$/.test(form.data) && !isNaN(new Date(form.data));
+        const descricaoValida = form.descricao.trim().length > 0;
+        const tipoValido = ["receita", "despesa"].includes(form.tipo);
+        const valorValido = !isNaN(parseFloat(form.valor)) && parseFloat(form.valor) > 0;
+
+        if (!dataValida) {
+            setErro("Data inválida.");
             return;
         }
-        try {
-            const blob = await exportExcel(lancamentos, arquivoExistente);
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "caixa-diario.xlsx";
-            a.click();
-            URL.revokeObjectURL(url);
-            setModalAberto(true);
-        } catch (e) {
-            setErro("Erro ao gerar planilha. Tente novamente.");
+        if (!descricaoValida) {
+            setErro("Descrição não pode ser vazia.");
+            return;
         }
+        if (!tipoValido) {
+            setErro("Tipo deve ser receita ou despesa.");
+            return;
+        }
+        if (!valorValido) {
+            setErro("Valor deve ser um número positivo.");
+            return;
+        }
+
+        setErro(null);
+        setLancamentos([...lancamentos, {
+            data: form.data,
+            descricao: form.descricao.trim(),
+            tipo: form.tipo,
+            valor: parseFloat(form.valor)
+        }]);
+        setForm({ data: "", descricao: "", tipo: "receita", valor: "" });
     }
 
     return (
