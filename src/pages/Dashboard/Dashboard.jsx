@@ -1,5 +1,63 @@
+import { useState } from "react";
+import { uploadExcel } from "../../services/api";
+import DropZone from "../../components/DropZone/DropZone";
+import KpiCard from "../../components/KpiCard/KpiCard";
+import GraficoBarras from "../../components/GraficoBarras/GraficoBarras";
+import GraficoLinha from "../../components/GraficoLinha/GraficoLinha";
+import "./Dashboard.css";
+
 function Dashboard() {
-    return <div>Dashboard</div>;
+    const [dados, setDados] = useState(null);
+    const [erro, setErro] = useState(null);
+    const [carregando, setCarregando] = useState(false);
+
+    async function handleUpload(file) {
+        setCarregando(true);
+        setErro(null);
+        try {
+            const resultado = await uploadExcel(file);
+            setDados(resultado);
+        } catch (e) {
+            setErro(e.message);
+        } finally {
+            setCarregando(false);
+        }
+    }
+
+    return (
+        <div className="dashboard-container">
+            <header className="dashboard-header">
+                <span className="dashboard-logo-icone">▣</span>
+                <span className="dashboard-logo-texto">Caixa Diário</span>
+            </header>
+
+            <main className="dashboard-main">
+                {!dados && (
+                    <>
+                        <DropZone onUpload={handleUpload} />
+                        {carregando && <p className="dashboard-msg">Carregando...</p>}
+                        {erro && <p className="dashboard-erro">{erro}</p>}
+                    </>
+                )}
+
+                {dados && (
+                    <>
+                        <h2 className="dashboard-titulo">Dashboard</h2>
+                        <div className="dashboard-kpis">
+                            <KpiCard titulo="TOTAL DE RECEITAS" valor={dados.total_receitas} cor="verde" />
+                            <KpiCard titulo="TOTAL DE DESPESAS" valor={dados.total_despesas} cor="vermelho" />
+                            <KpiCard titulo="CAIXA" valor={dados.lucro_acumulado} cor={dados.lucro_acumulado >= 0 ? "verde" : "vermelho"} />
+                            <KpiCard titulo="MARGEM DE LUCRO" valor={dados.margem_lucro} tipo="percentual" />
+                        </div>
+                        <div className="dashboard-graficos">
+                            <GraficoBarras dados={dados.serie_diaria} />
+                            <GraficoLinha dados={dados.serie_acumulado} />
+                        </div>
+                    </>
+                )}
+            </main>
+        </div>
+    );
 }
 
 export default Dashboard;

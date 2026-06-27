@@ -1,0 +1,25 @@
+.dropzone {
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    margin-bottom: 1rem;
+}
+
+.dropzone:hover {
+    border-color: #2e7d5e;
+}
+
+.dropzone-icone {
+    font-size: 2rem;
+    color: #2e7d5e;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.dropzone-texto {
+    color: #888;
+    font-size: 0.95rem;
+}

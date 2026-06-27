@@ -1,0 +1,59 @@
+.dashboard-container {
+    min-height: 100vh;
+    background-color: #fff;
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.dashboard-logo-icone {
+    color: #2e7d5e;
+    font-size: 1.5rem;
+}
+
+.dashboard-logo-texto {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.dashboard-main {
+    padding: 2rem;
+}
+
+.dashboard-titulo {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #1a1a1a;
+}
+
+.dashboard-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.dashboard-graficos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.dashboard-msg {
+    text-align: center;
+    color: #666;
+    margin-top: 1rem;
+}
+
+.dashboard-erro {
+    text-align: center;
+    color: #c0392b;
+    margin-top: 1rem;
+}
