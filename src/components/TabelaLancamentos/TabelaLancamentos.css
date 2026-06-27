@@ -1,0 +1,70 @@
+.tabela-container {
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.tabela-titulo {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela thead tr {
+    background-color: #f5f5f5;
+}
+
+.tabela th {
+    text-align: left;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.tabela td {
+    padding: 0.85rem 1.5rem;
+    font-size: 0.9rem;
+    color: #333;
+    border-top: 1px solid #f0f0f0;
+}
+
+.tabela-badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.tabela-badge--receita {
+    background-color: #d4edda;
+    color: #1e7e34;
+}
+
+.tabela-badge--despesa {
+    background-color: #fde8e8;
+    color: #c0392b;
+}
+
+.tabela-btn-remover {
+    background: none;
+    border: none;
+    color: #bbb;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.tabela-btn-remover:hover {
+    color: #c0392b;
+}
