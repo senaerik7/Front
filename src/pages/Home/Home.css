@@ -4,16 +4,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 2rem 1rem;
 }
 
 .home-content {
     text-align: center;
     max-width: 700px;
-    padding: 2rem;
+    width: 100%;
 }
 
 .home-titulo {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
     color: #1a1a1a;
     margin-bottom: 0.75rem;
@@ -29,6 +30,7 @@
     display: flex;
     gap: 1.5rem;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .home-card {
@@ -39,6 +41,8 @@
     width: 220px;
     cursor: pointer;
     transition: box-shadow 0.2s;
+    flex: 1 1 180px;
+    max-width: 260px;
 }
 
 .home-card:hover {
@@ -70,4 +74,20 @@
     font-size: 0.85rem;
     color: #888;
     line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+    .home-titulo {
+        font-size: 1.4rem;
+    }
+
+    .home-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .home-card {
+        width: 100%;
+        max-width: 100%;
+    }
 }

@@ -68,3 +68,35 @@
 .tabela-btn-remover:hover {
     color: #c0392b;
 }
+
+@media (max-width: 768px) {
+    .tabela thead {
+        display: none;
+    }
+
+    .tabela,
+    .tabela tbody,
+    .tabela tr,
+    .tabela td {
+        display: block;
+        width: 100%;
+    }
+
+    .tabela tr {
+        padding: 0.75rem 1rem;
+        border-top: 1px solid #f0f0f0;
+        position: relative;
+    }
+
+    .tabela td {
+        padding: 0.2rem 0;
+        border: none;
+        font-size: 0.85rem;
+    }
+
+    .tabela td:last-child {
+        position: absolute;
+        top: 0.75rem;
+        right: 1rem;
+    }
+}
