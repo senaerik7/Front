@@ -13,13 +13,13 @@ function Home() {
                 <div className="home-cards">
                     <div className="home-card" onClick={() => navigate("/dashboard")}>
                         <span className="home-card-icone">⬆</span>
-                        <h2 className="home-card-titulo">Analisar Excel</h2>
+                        <h2 className="home-card-titulo">Analisar Planilha</h2>
                         <p className="home-card-descricao">Faça upload de uma planilha e visualize o dashboard</p>
                     </div>
 
                     <div className="home-card" onClick={() => navigate("/formulario")}>
                         <span className="home-card-icone home-card-icone--verde">📄</span>
-                        <h2 className="home-card-titulo">Criar Excel</h2>
+                        <h2 className="home-card-titulo">Criar Planilha</h2>
                         <p className="home-card-descricao">Monte seus lançamentos e exporte uma planilha pronta</p>
                     </div>
                 </div>
