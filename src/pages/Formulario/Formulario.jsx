@@ -27,24 +27,6 @@ function Formulario() {
     }
 
     function handleAdicionar() {
-        if (!form.data || !form.descricao || !form.valor) {
-            setErro("Preencha todos os campos antes de adicionar.");
-            return;
-        }
-        if (parseFloat(form.valor) <= 0) {
-            setErro("O valor deve ser maior que zero.");
-            return;
-        }
-        setErro(null);
-        setLancamentos([...lancamentos, { ...form, valor: parseFloat(form.valor) }]);
-        setForm({ data: "", descricao: "", tipo: "receita", valor: "" });
-    }
-
-    function handleRemover(index) {
-        setLancamentos(lancamentos.filter((_, i) => i !== index));
-    }
-
-    function handleAdicionar() {
         const dataValida = /^\d{4}-\d{2}-\d{2}$/.test(form.data) && !isNaN(new Date(form.data));
         const descricaoValida = form.descricao.trim().length > 0;
         const tipoValido = ["receita", "despesa"].includes(form.tipo);
@@ -75,6 +57,23 @@ function Formulario() {
             valor: parseFloat(form.valor)
         }]);
         setForm({ data: "", descricao: "", tipo: "receita", valor: "" });
+    }
+
+    function handleRemover(index) {
+        setLancamentos(lancamentos.filter((_, i) => i !== index));
+    }
+
+    async function handleGerar() {
+        if (lancamentos.length === 0) {
+            setErro("Adicione pelo menos um lançamento.");
+            return;
+        }
+        try {
+            await exportExcel(lancamentos);
+            setModalAberto(true);
+        } catch (e) {
+            setErro("Erro ao gerar planilha. Tente novamente.");
+        }
     }
 
     return (

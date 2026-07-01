@@ -17,19 +17,22 @@ export async function uploadExcel(file) {
     return response.json();
 }
 
-export async function exportExcel(lancamentos, file = null) {
-    const formData = new FormData();
-    formData.append("lancamentos", JSON.stringify(lancamentos));
-    if (file) formData.append("file", file);
-
+export async function exportExcel(lancamentos) {
     const response = await fetch(`${API_URL}/export`, {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(lancamentos),
     });
 
-    if (!response.ok) throw new Error("Erro ao gerar planilha");
+    if (!response.ok) throw new Error("Erro ao exportar planilha");
 
-    return response.blob();
+    const blob = await response.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "caixa-diario.xlsx";
+    a.click();
+    URL.revokeObjectURL(url);
 }
 
 export async function getTemplate() {

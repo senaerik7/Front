@@ -30,3 +30,17 @@
 .kpicard-valor--neutro {
     color: #1a1a1a;
 }
+
+@media (max-width: 480px) {
+    .kpicard {
+        padding: 0.9rem 1rem;
+    }
+
+    .kpicard-valor {
+        font-size: 1.2rem;
+    }
+
+    .kpicard-titulo {
+        font-size: 0.7rem;
+    }
+}
