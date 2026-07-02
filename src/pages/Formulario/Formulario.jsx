@@ -1,25 +1,40 @@
 import { useState, useRef } from "react";
-import { exportExcel } from "../../services/api";
+import { exportExcel, uploadXlsxExistente } from "../../services/api";
 import TabelaLancamentos from "../../components/TabelaLancamentos/TabelaLancamentos";
 import "./Formulario.css";
 
 function Formulario() {
     const [lancamentos, setLancamentos] = useState([]);
-    const [arquivoExistente, setArquivoExistente] = useState(null);
     const [form, setForm] = useState({ data: "", descricao: "", tipo: "receita", valor: "" });
     const [erro, setErro] = useState(null);
     const [modalAberto, setModalAberto] = useState(false);
+    const [carregandoArquivo, setCarregandoArquivo] = useState(false);
     const inputArquivoRef = useRef(null);
 
-    function handleArquivo(e) {
+    async function handleArquivo(e) {
         const file = e.target.files[0];
-        if (file) setArquivoExistente(file);
+        if (!file) return;
+        setCarregandoArquivo(true);
+        try {
+            const dados = await uploadXlsxExistente(file);
+            const lancamentosFormatados = dados.map((l) => ({
+                data: l.data,
+                descricao: l.descricao,
+                tipo: l.tipo,
+                valor: l.valor,
+            }));
+            setLancamentos(lancamentosFormatados);
+        } catch (e) {
+            setErro("Erro ao ler planilha existente.");
+        } finally {
+            setCarregandoArquivo(false);
+        }
     }
 
     function handleDropArquivo(e) {
         e.preventDefault();
         const file = e.dataTransfer.files[0];
-        if (file) setArquivoExistente(file);
+        if (file) handleArquivo({ target: { files: [file] } });
     }
 
     function handleChange(e) {
@@ -32,22 +47,10 @@ function Formulario() {
         const tipoValido = ["receita", "despesa"].includes(form.tipo);
         const valorValido = !isNaN(parseFloat(form.valor)) && parseFloat(form.valor) > 0;
 
-        if (!dataValida) {
-            setErro("Data inválida.");
-            return;
-        }
-        if (!descricaoValida) {
-            setErro("Descrição não pode ser vazia.");
-            return;
-        }
-        if (!tipoValido) {
-            setErro("Tipo deve ser receita ou despesa.");
-            return;
-        }
-        if (!valorValido) {
-            setErro("Valor deve ser um número positivo.");
-            return;
-        }
+        if (!dataValida) { setErro("Data inválida."); return; }
+        if (!descricaoValida) { setErro("Descrição não pode ser vazia."); return; }
+        if (!tipoValido) { setErro("Tipo deve ser receita ou despesa."); return; }
+        if (!valorValido) { setErro("Valor deve ser um número positivo."); return; }
 
         setErro(null);
         setLancamentos([...lancamentos, {
@@ -89,7 +92,7 @@ function Formulario() {
                 <input ref={inputArquivoRef} type="file" accept=".xlsx" style={{ display: "none" }} onChange={handleArquivo} />
                 <span className="formulario-dropzone-icone">⬆</span>
                 <p className="formulario-dropzone-texto">
-                    {arquivoExistente ? arquivoExistente.name : "Adicionar a uma planilha existente"}
+                    {carregandoArquivo ? "Carregando..." : "Adicionar a uma planilha existente"}
                 </p>
                 <p className="formulario-dropzone-subtexto">Opcional — arraste um .xlsx ou clique para selecionar</p>
             </div>

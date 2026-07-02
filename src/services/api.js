@@ -39,3 +39,17 @@ export async function getTemplate() {
     const response = await fetch(`${API_URL}/template`);
     return response.json();
 }
+
+export async function uploadXlsxExistente(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await fetch(`${API_URL}/upload/xlsx_existente`, {
+        method: "POST",
+        body: formData,
+    });
+
+    if (!response.ok) throw new Error("Erro ao ler planilha existente");
+
+    return response.json();
+}

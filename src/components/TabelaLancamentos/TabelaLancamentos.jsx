@@ -19,7 +19,14 @@ function TabelaLancamentos({ lancamentos, onRemover }) {
                 <tbody>
                     {lancamentos.map((l, i) => (
                         <tr key={i}>
-                            <td>{new Date(l.data + "T00:00:00").toLocaleDateString("pt-BR")}</td>
+                            <td>{(() => {
+                                const partes = l.data.split("-");
+                                if (partes.length === 3 && partes[0].length === 2) {
+                                    return `${partes[0]}/${partes[1]}/${partes[2]}`;
+                                }
+                                const date = new Date(l.data + "T00:00:00");
+                                return isNaN(date) ? l.data : date.toLocaleDateString("pt-BR");
+                            })()}</td>
                             <td>{l.descricao}</td>
                             <td>
                                 <span className={`tabela-badge tabela-badge--${l.tipo}`}>
