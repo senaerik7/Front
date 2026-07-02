@@ -2,6 +2,7 @@ import "./KpiCard.css";
 
 function KpiCard({ titulo, valor, cor, tipo }) {
     function formatarValor() {
+        if (valor === undefined || valor === null) return "—";
         if (tipo === "percentual") return `${valor.toFixed(1)}%`;
         return valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
     }
