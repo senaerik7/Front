@@ -27,7 +27,7 @@ function Dashboard() {
     return (
         <div className="dashboard-container">
             <header className="dashboard-header">
-                <span className="dashboard-logo-icone">▣</span>
+                <img src="/src/assets/5.png" alt="Logo" className="dashboard-logo-img" />
                 <span className="dashboard-logo-texto">Caixa Diário</span>
             </header>
 

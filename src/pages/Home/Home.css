@@ -63,6 +63,12 @@
     padding: 0.3rem 0.4rem;
 }
 
+.home-logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+}
+
 .home-card-titulo {
     font-size: 1rem;
     font-weight: 600;

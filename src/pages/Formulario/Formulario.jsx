@@ -81,7 +81,10 @@ function Formulario() {
 
     return (
         <div className="formulario-container">
-            <h1 className="formulario-titulo">Novo lançamento</h1>
+            <div className="formulario-header">
+                <img src="/src/assets/5.png" alt="Logo" className="formulario-logo" />
+                <h1 className="formulario-titulo">Novo lançamento</h1>
+            </div>
 
             <div
                 className="formulario-dropzone"
