@@ -44,11 +44,9 @@ function Dashboard() {
                     <>
                         <h2 className="dashboard-titulo">Dashboard</h2>
                         <div className="dashboard-kpis">
-                            <KpiCard titulo="TOTAL DE RECEITAS" valor={dados.total_receitas} cor="verde" />
-                            <KpiCard titulo="TOTAL DE DESPESAS" valor={dados.total_despesas} cor="vermelho" />
-                            <KpiCard titulo="CAIXA" valor={dados.lucro_acumulado} cor={dados.lucro_acumulado >= 0 ? "verde" : "vermelho"} />
-                            <KpiCard titulo="MEDIA DE RECEITA" valor={dados.media_receitas} cor="verde" />
-                            <KpiCard titulo="MEDIA DE DESPESAS" valor={dados.media_despesas} cor="vermelho" />
+                            <KpiCard titulo="CAIXA" valor={dados.caixa} cor={dados.caixa >= 0 ? "verde" : "vermelho"} />
+                            <KpiCard titulo="MEDIA DE RECEITA" valor={dados.media_receita} cor="verde" />
+                            <KpiCard titulo="MEDIA DE DESPESAS" valor={dados.media_despesa} cor="vermelho" />
                             <KpiCard titulo="MEDIA DE LUCRO/PREJUÍZO" valor={dados.media_lucro} cor={dados.media_lucro >= 0 ? "verde" : "vermelho"} />
                         </div>
                         <div className="dashboard-graficos">
