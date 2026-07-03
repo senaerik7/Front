@@ -4,6 +4,7 @@ import DropZone from "../../components/DropZone/DropZone";
 import KpiCard from "../../components/KpiCard/KpiCard";
 import GraficoBarras from "../../components/GraficoBarras/GraficoBarras";
 import GraficoLinha from "../../components/GraficoLinha/GraficoLinha";
+import logo from "../../assets/5.png";
 import "./Dashboard.css";
 
 function Dashboard() {
@@ -27,7 +28,7 @@ function Dashboard() {
     return (
         <div className="dashboard-container">
             <header className="dashboard-header">
-                <img src="/src/assets/5.png" alt="Logo" className="dashboard-logo-img" />
+                <img src={logo} alt="Logo" className="dashboard-logo-img" />
                 <span className="dashboard-logo-texto">Caixa Diário</span>
             </header>
 

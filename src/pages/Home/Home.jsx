@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import logo from "../../assets/5.png";
 
 function Home() {
     const navigate = useNavigate();
@@ -7,7 +8,7 @@ function Home() {
     return (
         <div className="home-container">
             <div className="home-content">
-                <img src="/src/assets/5.png" alt="Logo" className="home-logo" />
+                <img src={logo} alt="Logo" className="home-logo" />
                 <h1 className="home-titulo">Gerencie seu caixa diário com simplicidade</h1>
                 <p className="home-subtitulo">Analise planilhas existentes ou crie novas em poucos cliques</p>
 

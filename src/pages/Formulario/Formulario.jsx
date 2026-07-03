@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { exportExcel, uploadXlsxExistente } from "../../services/api";
 import TabelaLancamentos from "../../components/TabelaLancamentos/TabelaLancamentos";
+import logo from "../../assets/5.png";
 import "./Formulario.css";
 
 function Formulario() {
@@ -82,7 +83,7 @@ function Formulario() {
     return (
         <div className="formulario-container">
             <div className="formulario-header">
-                <img src="/src/assets/5.png" alt="Logo" className="formulario-logo" />
+                <img src={logo} alt="Logo" className="formulario-logo" />
                 <h1 className="formulario-titulo">Novo lançamento</h1>
             </div>
 
