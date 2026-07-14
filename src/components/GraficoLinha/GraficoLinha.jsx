@@ -9,9 +9,14 @@ const LABELS_GRANULARIDADE = {
     trimestre: "por trimestre",
 };
 
+const PX_POR_PONTO = 38;
+const LIMITE_SEM_SCROLL = 15;
+
 function GraficoLinha({ dados }) {
     const { dadosAgregados, granularidade } = agregarSerieAcumulada(dados);
     const intervalo = Math.max(0, Math.ceil(dadosAgregados.length / 8) - 1);
+    const precisaScroll = dadosAgregados.length > LIMITE_SEM_SCROLL;
+    const larguraMinima = dadosAgregados.length * PX_POR_PONTO;
 
     return (
         <div className="grafico-card">
@@ -19,28 +24,32 @@ function GraficoLinha({ dados }) {
                 <p className="grafico-titulo">Variação do Caixa</p>
                 <span className="grafico-granularidade">{LABELS_GRANULARIDADE[granularidade]}</span>
             </div>
-            <ResponsiveContainer width="100%" height={300}>
-                <AreaChart data={dadosAgregados}>
-                    <XAxis
-                        dataKey="data"
-                        tick={{ fontSize: 11 }}
-                        interval={intervalo}
-                        angle={-35}
-                        textAnchor="end"
-                        height={50}
-                    />
-                    <YAxis tick={{ fontSize: 11 }} />
-                    <Tooltip />
-                    <Area
-                        type="linear"
-                        dataKey="saldo"
-                        name="Saldo"
-                        stroke="#2e7d5e"
-                        fill="#d0ede3"
-                        dot={{ r: 4, fill: "#fff", stroke: "#2e7d5e", strokeWidth: 2 }}
-                    />
-                </AreaChart>
-            </ResponsiveContainer>
+            <div className={precisaScroll ? "grafico-scroll" : ""}>
+                <div style={precisaScroll ? { minWidth: `${larguraMinima}px` } : undefined}>
+                    <ResponsiveContainer width="100%" height={300}>
+                        <AreaChart data={dadosAgregados}>
+                            <XAxis
+                                dataKey="data"
+                                tick={{ fontSize: 11 }}
+                                interval={precisaScroll ? 0 : intervalo}
+                                angle={-35}
+                                textAnchor="end"
+                                height={50}
+                            />
+                            <YAxis tick={{ fontSize: 11 }} />
+                            <Tooltip />
+                            <Area
+                                type="linear"
+                                dataKey="saldo"
+                                name="Saldo"
+                                stroke="#2e7d5e"
+                                fill="#d0ede3"
+                                dot={{ r: 4, fill: "#fff", stroke: "#2e7d5e", strokeWidth: 2 }}
+                            />
+                        </AreaChart>
+                    </ResponsiveContainer>
+                </div>
+            </div>
         </div>
     );
 }

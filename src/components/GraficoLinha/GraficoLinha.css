@@ -32,3 +32,25 @@
     text-transform: uppercase;
     letter-spacing: 0.03em;
 }
+
+.grafico-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    min-width: 0;
+}
+
+.grafico-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.grafico-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.grafico-scroll::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
